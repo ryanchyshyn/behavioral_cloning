@@ -45,19 +45,19 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 5x5 filter sizes and depths between 24 and 64 (model.py lines 61-64) 
+My model consists of a convolution neural network with 5x5 filter sizes and depths between 24 and 64 (model.py lines 83-89) 
 
 The model includes RELU layers to introduce nonlinearity, and the data is normalized in the model using a Keras lambda layer (code line 59). 
 
-Also model includes cropping layer (line 60).
+Also model includes cropping layer (line 60) and dropout layer.
 
 #### 2. Attempts to reduce overfitting in the model
 
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 72). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 105). To prevent overfitting the model I used dropout layers. The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 #### 3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 72).
+The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 104).
 
 #### 4. Appropriate training data
 
@@ -71,28 +71,33 @@ For details about how I created the training data, see the next section.
 
 My first step was to use a convolution neural network model similar to the described in the "Behavioral Cloning" lesson.
 
-Training the model on more than two epochs leads to increasing testing set validation loss. So to avoid overfitting I decided to keep epoch parameter equals to 2.
+Training the model on more than two epochs leads to increasing testing set validation loss. So to avoid overfitting I decided to keep epoch parameter equals to 3.
 
 To introduce car returning to the center I included left/right images into the training set. Steering correction for such images is 0.35.
-
-The interesting point is that training the model several times on the same data set produces different results. So I trained the model several times and selected the best result.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
 #### 2. Final Model Architecture
 
-The final model architecture (model.py lines 59-69) consisted of a convolution neural network with the following layers and layer sizes 
+The final model architecture (model.py lines 81-89) consisted of a convolution neural network with the following layers and layer sizes 
 ```
 model.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape = (160, 320, 3)))
 model.add(Cropping2D(cropping=((70, 25), (0, 0))))
-model.add(Convolution2D(24, 5, 5, subsample = (2, 2), activation = "relu"))
-model.add(Convolution2D(36, 5, 5, subsample = (2, 2), activation = "relu"))
-model.add(Convolution2D(48, 5, 5, subsample = (2, 2), activation = "relu"))
-model.add(Convolution2D(64, 5, 5, activation = "relu"))
+model.add(Convolution2D(24, 5, 5, subsample=(2, 2), activation="relu"))
+model.add(Dropout(0.2))
+model.add(Convolution2D(36, 5, 5, subsample=(2, 2), activation="relu"))
+model.add(Dropout(0.2))
+model.add(Convolution2D(48, 5, 5, subsample=(2, 2), activation="relu"))
+model.add(Dropout(0.2))
+model.add(Convolution2D(64, 5, 5, activation="relu"))
+model.add(Dropout(0.2))
 model.add(Flatten())
 model.add(Dense(100))
+model.add(Dropout(0.2))
 model.add(Dense(50))
+model.add(Dropout(0.2))
 model.add(Dense(10))
+model.add(Dropout(0.2))
 model.add(Dense(1))
 ```
 
@@ -112,12 +117,10 @@ Then I additionally recorded key turns:
 
 To augment the data set, I flipped center images and corrected angles by valueof 0.35.
 
-The files count is 41964 that with flipped images will give 55952 images totally.
-
-Also I tried to flip left/right images but didn't get acceptable results so I rejected this approach.
+Also I flipped left/right images and inverted steering values.
 
 I used data nomralization with lambda function as well as image cropping.
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 2 as evidenced by decreasing validation set loss. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by decreasing validation set loss. I used an adam optimizer so that manually training the learning rate wasn't necessary.
