@@ -10,11 +10,11 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[center_2017_07_24_23_22_05_604]: ./examples/center_2017_07_24_23_22_05_604.jpg"
-[center_2017_07_24_23_23_13_804]: ./examples/center_2017_07_24_23_23_13_804.jpg"
-[center_2017_07_24_23_23_26_235]: ./examples/center_2017_07_24_23_23_26_235.jpg"
-[center_2017_07_24_23_28_05_608]: ./examples/center_2017_07_24_23_28_05_608.jpg"
-[center_2017_07_24_23_33_32_724]: ./examples/center_2017_07_24_23_33_32_724.jpg"
+[center_2017_07_24_23_22_05_604]: ./examples/center_2017_07_24_23_22_05_604.jpg
+[center_2017_07_24_23_23_13_804]: ./examples/center_2017_07_24_23_23_13_804.jpg
+[center_2017_07_24_23_23_26_235]: ./examples/center_2017_07_24_23_23_26_235.jpg
+[center_2017_07_24_23_28_05_608]: ./examples/center_2017_07_24_23_28_05_608.jpg
+[center_2017_07_24_23_33_32_724]: ./examples/center_2017_07_24_23_33_32_724.jpg
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
