@@ -69,8 +69,6 @@ For details about how I created the training data, see the next section.
 
 #### 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
-
 My first step was to use a convolution neural network model similar to the described in the "Behavioral Cloning" lesson.
 
 Training the model on more than two epochs leads to increasing testing set validation loss. So to avoid overfitting I decided to keep epoch parameter equals to 2.
